@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Build binaries
+        run: make build-all
+
+      - name: Create release archives
+        run: make release
+
+      - name: Generate checksums
+        run: |
+          cd dist
+          sha256sum *.tar.gz *.zip > SHA256SUMS
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            dist/*.tar.gz
+            dist/*.zip
+            dist/SHA256SUMS
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Homebrew formula
+        run: |
+          DARWIN_AMD64_SHA=$(sha256sum dist/prevent-llm-delete-darwin-amd64.tar.gz | awk '{print $1}')
+          DARWIN_ARM64_SHA=$(sha256sum dist/prevent-llm-delete-darwin-arm64.tar.gz | awk '{print $1}')
+          LINUX_AMD64_SHA=$(sha256sum dist/prevent-llm-delete-linux-amd64.tar.gz | awk '{print $1}')
+          LINUX_ARM64_SHA=$(sha256sum dist/prevent-llm-delete-linux-arm64.tar.gz | awk '{print $1}')
+
+          sed -i "s/YOUR_AMD64_SHA256_HERE/$DARWIN_AMD64_SHA/" Formula/prevent-llm-delete.rb
+          sed -i "s/YOUR_ARM64_SHA256_HERE/$DARWIN_ARM64_SHA/" Formula/prevent-llm-delete.rb
+          sed -i "s/YOUR_LINUX_AMD64_SHA256_HERE/$LINUX_AMD64_SHA/" Formula/prevent-llm-delete.rb
+          sed -i "s/YOUR_LINUX_ARM64_SHA256_HERE/$LINUX_ARM64_SHA/" Formula/prevent-llm-delete.rb
+
+          echo "Updated Homebrew formula with SHA256 checksums"
+          cat Formula/prevent-llm-delete.rb
