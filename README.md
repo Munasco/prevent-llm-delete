@@ -20,6 +20,16 @@ LLMs (Claude, ChatGPT, etc.) sometimes run destructive commands like `rm -rf` wh
 
 ## Installation
 
+### ⚡ Quick Install (Recommended)
+
+**Using npx (all platforms):**
+
+```bash
+npx prevent-llm-delete
+```
+
+That's it! This downloads, installs, and sets up the wrapper automatically.
+
 ### 📦 Homebrew (macOS/Linux)
 
 ```bash
@@ -31,7 +41,7 @@ source ~/.zshrc  # or restart terminal
 ### 🌐 Curl Install (macOS/Linux)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yourusername/prevent-llm-delete/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Munasco/prevent-llm-delete/main/install.sh | bash
 prevent-llm-delete install
 source ~/.zshrc  # or restart terminal
 ```

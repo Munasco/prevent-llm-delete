@@ -1,0 +1,51 @@
+{
+  "name": "prevent-llm-delete",
+  "version": "1.0.0",
+  "description": "Cross-platform CLI to prevent accidental deletions by LLMs and humans - wraps rm/Remove-Item with trash/recycle bin",
+  "main": "install.js",
+  "bin": {
+    "prevent-llm-delete": "install.js"
+  },
+  "scripts": {
+    "postinstall": "node install.js"
+  },
+  "keywords": [
+    "rm",
+    "delete",
+    "trash",
+    "safety",
+    "llm",
+    "ai",
+    "claude",
+    "chatgpt",
+    "copilot",
+    "protection",
+    "recycle-bin",
+    "cross-platform",
+    "cli",
+    "shell",
+    "powershell",
+    "bash",
+    "zsh",
+    "fish",
+    "security"
+  ],
+  "author": "Munasco",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Munasco/prevent-llm-delete"
+  },
+  "bugs": {
+    "url": "https://github.com/Munasco/prevent-llm-delete/issues"
+  },
+  "homepage": "https://github.com/Munasco/prevent-llm-delete#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ]
+}

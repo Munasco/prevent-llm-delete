@@ -4,21 +4,29 @@ Get protected from accidental deletions in 60 seconds!
 
 ## Installation
 
-### Option 1: Homebrew (Recommended for macOS/Linux)
+### Option 1: npx (Fastest! ⚡)
+
+```bash
+npx prevent-llm-delete
+```
+
+**Done!** Auto-downloads and installs for your platform.
+
+### Option 2: Homebrew (macOS/Linux)
 
 ```bash
 brew install yourusername/tap/prevent-llm-delete
 ```
 
-### Option 2: Curl Script
+### Option 3: Curl Script
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yourusername/prevent-llm-delete/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Munasco/prevent-llm-delete/main/install.sh | bash
 ```
 
-### Option 3: Download Binary
+### Option 4: Download Binary
 
-1. Go to [Releases](https://github.com/yourusername/prevent-llm-delete/releases)
+1. Go to [Releases](https://github.com/Munasco/prevent-llm-delete/releases)
 2. Download for your platform
 3. Extract and move to `/usr/local/bin` (or `C:\Windows\System32` on Windows)
 
